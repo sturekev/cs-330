@@ -11,10 +11,11 @@
  */
 function greet(name, selector) {
     let greetElement = document.querySelector(selector);
-    let p = document.createElement("h1");
+    // let p = document.createElement("h1");
     
-    p.innerText = `Hello ${name}`;
-    greetElement.append(p);
+    // p.innerText = `Hello ${name}`;
+    // greetElement.append(p);
+    greetElement.innerText = `Hello ${name}`;
 
 }
 
@@ -47,15 +48,12 @@ function isPrime(number) {
  */
 function printNumberInfo(number, selector) {
     let greetElement = document.querySelector(selector);
-    let p = document.createElement('p');
+    // let p = document.createElement('p');
     if (isPrime(number)){
-        p.innerText = `${number} is a Prime number`;
-        greetElement.append(p);   
+        greetElement.innerText = `${number} is a Prime number`;   
     }
     else{
-        p.innerText = `${number} not a prime number`;
-        greetElement.append(p);
-        
+        greetElement.innerText = `${number} not a prime number`;      
     }
     
 }
@@ -120,8 +118,8 @@ function printNPrimes(number, selector) {
  */
 function displayWarnings(urlParams, selector) {
     let warningGreet  = document.querySelector(selector);
-    let urlParamsName = urlParams["name"];
-    let urlParamsNumber = urlParams["number"] ?? urlParams["n"];
+    let urlParamsName = urlParams.get("name");
+    let urlParamsNumber = urlParams.get("number");
     if (!urlParamsName){
         let warnName = document.createElement('div');
         warnName.innerText = `you did not provide any name`;
@@ -139,8 +137,11 @@ function displayWarnings(urlParams, selector) {
 window.onload = function () {
     // TODO: Initialize the following variables
     let urlParams = new URLSearchParams(window.location.search);
-    let name = urlParams["name"] ?? "student";
-    let number = urlParams["number"] ?? urlParams["n"] ?? 330;
+    // let name = urlParams["name"] ?? "student";
+    // let number = urlParams["number"] ?? urlParams["n"] ?? 330;
+    let name = urlParams.get("name") || "Student";
+    let number = urlParams.get("number") || 330;
+
     this.displayWarnings(urlParams, "#warnings");
     greet(name, "#greeting");
     printNumberInfo(number, "#numberInfo");
