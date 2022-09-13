@@ -50,10 +50,10 @@ function printNumberInfo(number, selector) {
     let greetElement = document.querySelector(selector);
     // let p = document.createElement('p');
     if (isPrime(number)){
-        greetElement.innerText = `${number} is a Prime number`;   
+        greetElement.innerText = `${number} is a prime number`;   
     }
     else{
-        greetElement.innerText = `${number} not a prime number`;      
+        greetElement.innerText = `${number} is not a prime number`;      
     }
     
 }
@@ -139,7 +139,7 @@ window.onload = function () {
     let urlParams = new URLSearchParams(window.location.search);
     // let name = urlParams["name"] ?? "student";
     // let number = urlParams["number"] ?? urlParams["n"] ?? 330;
-    let name = urlParams.get("name") || "Student";
+    let name = urlParams.get("name") || "student";
     let number = urlParams.get("number") || 330;
 
     this.displayWarnings(urlParams, "#warnings");
