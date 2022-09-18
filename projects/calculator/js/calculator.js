@@ -42,7 +42,6 @@ function eval_expr() {
         var setOperation = new Set(["+","-","/","*"]);
         for (let idx = 0; idx < val_math.length; idx ++){
             if (setOperation.has(val_math[idx])){
-                console.log("running If");
                 if (setOperation.has(val_math[idx+1])) {
                     result = "ERROR";
                 }
@@ -52,18 +51,17 @@ function eval_expr() {
                     var num2 = parseFloat(val_math.slice(idx +1));
                     switch (val_math[idx]) {
                         case "+":
-                            result = (num1 + num2).toString();
+                            result = eval("num1+num2").toString();
                             break;
                         case "-":
-                            result = (num1 - num2).toString();
+                            result = eval("num1-num2").toString();
                             break;
                         case "*":
-                            result = (num1 * num2).toString();
+                            result = eval("num1*num2").toString();
                             break;
                         case "/":
                             console.log(result);
-                            result = (num1 / num2).toString();
-                            
+                            result = eval("num1/num2").toString();
                             break;
                     }
                 }
