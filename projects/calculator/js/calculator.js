@@ -60,7 +60,6 @@ function eval_expr() {
                             result = eval("num1*num2").toString();
                             break;
                         case "/":
-                            console.log(result);
                             result = eval("num1/num2").toString();
                             break;
                     }
