@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      href="css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/calculator.css" type="text/css" />
+    <script src="js/calculator.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
   </head>
+
 
   <body>
     <div class="container">
-      <span id="result">&nbsp;</span>
-      <button id="btn0" onclick="enterDigit(0)">0</button>
-      <button id="btn1" onclick="enterDigit(1)">1</button>
-      <button id="btn2" onclick="enterDigit(2)">2</button>
-      <button id="btn3" onclick="enterDigit(3)">3</button>
-      <button id="btn4" onclick="enterDigit(4)">4</button>
-      <button id="btn5" onclick="enterDigit(5)">5</button>
-      <button id="btn6" onclick="enterDigit(6)">6</button>
-      <button id="btn7" onclick="enterDigit(7)">7</button>
-      <button id="btn8" onclick="enterDigit(8)">8</button>
-      <button id="btn9" onclick="enterDigit(9)">9</button>
-      <button id="btnSum" onclick="enterOp('+')">+</button>
-      <button id="btnSub" onclick="enterOp('-')">-</button>
-      <button id="btnMul" onclick="enterOp('*')">*</button>
-      <button id="btnDiv" onclick="enterOp('/')">/</button>
-      <button id="btnEql" onclick="eval_expr()">=</button>
-      <button id="btnClr" onclick="clear_screen()">C</button>
-      <button id="btnDot" onclick="enterDigit('.')">.</button>
+      <div class = "row bg-secondary text-black">
+        <span id="result" class="h1">&nbsp;</span>
+      </div>
+      <div class="row">
+        <button class="bg-primary text-white" id="btnClr" onclick="clear_screen()">C</button>
+      </div>
+      <div class="row">
+        <div class="col-15">
+          <div class="row">
+            <button class="col-2 bg-dark text-white" id="btnSum" onclick="enterOp('+')">+</button>
+            <button class="col-2 bg-dark text-white" id="btnSub" onclick="enterOp('-')">-</button>
+            <button class="col-2 bg-dark text-white" id="btnMul" onclick="enterOp('*')">*</button>
+            <button class="col-2 bg-dark text-white" id="btnDiv" onclick="enterOp('/')">/</button>
+            <button class="col-2 bg-dark text-white" id="btnDot" onclick="enterDigit('.')">.</button>
+          </div>
+          <div class="row">
+            <button class="col-2" id="btn1" onclick="enterDigit(1)">1</button>
+            <button class="col-2" id="btn2" onclick="enterDigit(2)">2</button>
+            <button class="col-2" id="btn3" onclick="enterDigit(3)">3</button>
+            <button class="col-2" id="btn4" onclick="enterDigit(4)">4</button>
+            <button class="col-2" id="btn5" onclick="enterDigit(5)">5</button>
+          </div>
+          <div class="row">
+            <button class="col-2" id="btn6" onclick="enterDigit(6)">6</button>
+            <button class="col-2" id="btn7" onclick="enterDigit(7)">7</button>
+            <button class="col-2" id="btn8" onclick="enterDigit(8)">8</button>
+            <button class="col-2" id="btn9" onclick="enterDigit(9)">9</button>
+            <button class="col-2" id="btn0" onclick="enterDigit(0)">0</button>
+          </div>
+        </div>
+        <button class="bg-primary text-white" id="btnEql" onclick="eval_expr()">=</button>
+      </div>
+      
+      
+      
+
+
+      
     </div>
 
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
