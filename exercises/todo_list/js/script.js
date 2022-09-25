@@ -29,11 +29,13 @@ function addTask() {
     if (!titleVal || !dueDateVal){
         displayWarnings();
     }
-
-    for (row of rowcolids){
+    else{
+        for (row of rowcolids){
         let val = document.getElementById(row).value;
         vals.push(val);
+        }
     }
+    
     addRow(vals, document.getElementById("taskList"));
 }
 
