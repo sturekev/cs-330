@@ -5,14 +5,13 @@
 var team = ["Aardvark", "Beaver", "Cheetah", "Dolphin", "Elephant", "Flamingo", "Giraffe", "Hippo"];
 var priority = ["Low", "Normal", "Important", "Critical"];
 
-function displayWarnings(checkVal1 ){
+function displayWarnings( ){
     let warningDiv = document.querySelector("#feedbackMessage");
-    if (!checkVal1){
-        let warnName = document.createElement('div');
-        warnName.innerText = `Fill out title and due datename`;
-        warnName.classList.add("alert","alert-warning");
-        warningDiv.appendChild(warnName);
-    }
+    let warnName = document.createElement('div');
+    warnName.innerText = `Fill out title and due date`;
+    warnName.classList.add("alert","alert-warning");
+    warningDiv.appendChild(warnName);
+    
 }
 /**
  * Add a new task to the list
@@ -25,15 +24,15 @@ function addTask() {
     let rowcolids = ["title", "assignedTo", "priority", "dueDate"];
 
     //select id from html
+    let titleVal = document.getElementById(rowcolids[0]).value;
+    let dueDateVal = document.getElementById(rowcolids[3]).value;
+    if (!titleVal || !dueDateVal){
+        displayWarnings();
+    }
+
     for (row of rowcolids){
-        if (row == "title" || row == "dueDate"){
-            let val = document.getElementById(row).value;
-            displayWarnings(val);
-            vals.push(titleVal);
-        }
         let val = document.getElementById(row).value;
-        
-        vals.push(titleVal);
+        vals.push(val);
     }
     addRow(vals, document.getElementById("taskList"));
 }
