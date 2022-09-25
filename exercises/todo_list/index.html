@@ -4,36 +4,46 @@
     <title>TODO list</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">  
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>  
+        $(function() {  
+           $( "#dueDate" ).datepicker();  
+        });  
+     </script>   
 </head>
 
 <body> 
     <div class="container">
-        <h1>TODO List</h1>
+        <h1 class="bg-primary text-white">TODO List</h1>
+        
         <div class="container">
             <form id="newTask">
-            <div>
-                <div>
-                    <label for="title">Task</label>
-                    <input id="title" required />
+            <div class = "row">
+                <div class="col">
+                    <label class="row" for="title">Task</label>
+                    <input class="row" id="title" required />
                 </div>
 
-                <div>
-                    <label for="assignedTo">Assigned to</label>
-                    <select id="assignedTo"></select>
+                <div class="col">
+                    <label class="row" for="assignedTo">Assigned to</label>
+                    <select class="row" id="assignedTo"></select>
                 </div>
 
-                <div>
-                    <label for="priority">Priority</label>
-                    <select id="priority"></select>
+                <div class="col">
+                    <label class="row" for="priority">Priority</label>
+                    <select class="row" id="priority"></select>
                 </div>
 
-                <div>
-                    <label for="dueDate">Due date</label>
-                    <input id="dueDate" required />
+                <div class="col">
+                    <label class="row" for="dueDate">Due date</label>
+                    <input class="row" id="dueDate" required />
                 </div>
             </div>
-            <div>
-                <button type="button" id="addTaskBtn" onclick="addTask()">Add task</button>
+            <div id="feedbackMessage"></div>
+            <div class="row">
+                <button class="bg-primary text-white" type="button" id="addTaskBtn" onclick="addTask()">Add task</button>
             </div>
         </form>
     </div>
@@ -43,14 +53,17 @@
         <table id="taskList">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Task</th>
-                    <th>Assigned to</th>
-                    <th>Priority</th>
-                    <th>Due date</th>
+                    <th class="col-2">
+                        <input type="checkbox" onclick="selectAll()">
+                        <label for="vehicle1"> Select All</label><br>
+                    </th>
+                    <th class="col-3">Task</th>
+                    <th class="col-3">Assigned to</th>
+                    <th class="col-3">Priority</th>
+                    <th class="col-3">Due date</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tb"></tbody>
         </table>
     </div>
 

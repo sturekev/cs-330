@@ -1,11 +1,19 @@
 .critical {
+    background-color: red;
 }
 
 .important {
+    background-color: yellow;
 }
 
 .normal {
+    background-color: aliceblue;
 }
 
 .low {
+    background-color: green;
 }
+
+.taskList {
+    border-collapse: collapse;
+  }
