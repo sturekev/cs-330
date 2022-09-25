@@ -15,28 +15,28 @@ from playwright.sync_api import Page
 TIMEOUT = 1000
 
 
-def setup_module(module):
-    module.http_server = subprocess.Popen(
-        ["python3", "-m", "http.server", "--directory", "exercises/todo_list"]
-    )
-    try:
-        module.http_server.wait(timeout=1)
-    except subprocess.TimeoutExpired:
-        pass
+# def setup_module(module):
+#     module.http_server = subprocess.Popen(
+#         ["python3", "-m", "http.server", "--directory", "exercises/todo_list"]
+#     )
+#     try:
+#         module.http_server.wait(timeout=1)
+#     except subprocess.TimeoutExpired:
+#         pass
 
 
-def teardown_module(module):
-    module.http_server.terminate()
+# def teardown_module(module):
+#     module.http_server.terminate()
 
 
-def test_no_input(page: Page):
-    page.set_default_timeout(TIMEOUT)
-    page.goto("http://localhost:8000/")
-    page.click("#addTaskBtn")
-    assert (
-        page.query_selector("#feedbackMessage").inner_text()
-        == "Fill out title and due date"
-    )
+# def test_no_input(page: Page):
+#     page.set_default_timeout(TIMEOUT)
+#     page.goto("http://localhost:8000/")
+#     page.click("#addTaskBtn")
+#     assert (
+#         page.query_selector("#feedbackMessage").inner_text()
+#         == "Fill out title and due date"
+#     )
 
 
 # def test_no_date(page: Page):
@@ -115,18 +115,18 @@ def test_no_input(page: Page):
 #     assert priority.lower() in new_row.get_attribute("class")
 
 
-# def test_remove_row(page: Page):
-#     page.set_default_timeout(TIMEOUT)
-#     page.goto("http://localhost:8000/")
-#     page.fill("#title", "Task title")
-#     page.fill("#dueDate", "2022-09-25")
-#     page.click("#addTaskBtn")
-#     all_rows = page.query_selector_all("table[id='taskList'] > tbody > tr")
-#     assert len(all_rows) == 1
-#     page.check("table[id='taskList'] > tbody > tr > td > input[type='checkbox']")
-#     sleep(3)
-#     all_rows = page.query_selector_all("table[id='taskList'] > tbody > tr")
-#     assert len(all_rows) == 0
+def test_remove_row(page: Page):
+    page.set_default_timeout(TIMEOUT)
+    page.goto("http://localhost:8000/")
+    page.fill("#title", "Task title")
+    page.fill("#dueDate", "2022-09-25")
+    page.click("#addTaskBtn")
+    all_rows = page.query_selector_all("table[id='taskList'] > tbody > tr")
+    assert len(all_rows) == 1
+    page.check("table[id='taskList'] > tbody > tr > td > input[type='checkbox']")
+    sleep(3)
+    all_rows = page.query_selector_all("table[id='taskList'] > tbody > tr")
+    assert len(all_rows) == 0
 
 
 if __name__ == "__main__":

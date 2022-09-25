@@ -34,9 +34,10 @@ function addTask() {
         let val = document.getElementById(row).value;
         vals.push(val);
         }
+        addRow(vals, document.getElementById("taskList"));
     }
     
-    addRow(vals, document.getElementById("taskList"));
+    
 }
 
 /**
