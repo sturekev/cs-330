@@ -54,14 +54,16 @@ function addRow(valueList, parent) {
     let cb = document.createElement("input");
 
     let priorityVal = document.getElementById('priority').value;
-    tb.setAttribute("class",priorityVal.toLowerCase());
+    
+    row.setAttribute("class",priorityVal.toLowerCase());
     cb.setAttribute("type","checkbox");
     cb.setAttribute("onclick","removeRow(this);");
     td.appendChild(cb);
     row.appendChild(td);
+
     for (value of valueList){
         let td = document.createElement("td");
-        td.innerHTML = value;
+        td.innerText = value;
         row.appendChild(td)
     }
     tb.appendChild(row);
@@ -102,7 +104,7 @@ function populateSelect(selectId, sList) {
     for (let option in sList) {
         let anOption = document.createElement("option");
         anOption.setAttribute("value", sList[option]);
-        anOption.innerHTML = sList[option];
+        anOption.innerText = sList[option];
         sel.appendChild(anOption);
     }
 }
