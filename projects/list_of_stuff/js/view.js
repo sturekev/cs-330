@@ -5,7 +5,7 @@
 //Import other file.js
 // import {} from './model.js';
 // import {addRow,removeRow,RemoveAll} from './controller.js';
-// view for html page 
+// view  method interface for user
 
 // Tiers List
 var Tiers = ["S", "A", "B", "C", "D","E", "F"];
@@ -61,7 +61,7 @@ function addRow(valueList, parent) {
 
     let tierVal = document.getElementById('Tier').value;
     
-    row.setAttribute("class",tierVal);
+    
     cb.setAttribute("type","checkbox");
     // set up for check box;
     cb.setAttribute("onclick","checkSelect(this);");
@@ -70,6 +70,7 @@ function addRow(valueList, parent) {
 
     for (let value of valueList){
         let td = document.createElement("td");
+        if (value == tierVal){td.setAttribute("class",`col-2 ${tierVal}`);}
         td.innerText = value;
         row.appendChild(td)
     }
