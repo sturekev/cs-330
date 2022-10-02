@@ -90,7 +90,7 @@ class Subject{
     }
 }
 
-class allPlayer extends playerSubject {
+class allPlayer extends Subject {
     constructor(){
         super();
         this._allPlayer = [];
