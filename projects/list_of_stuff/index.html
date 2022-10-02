@@ -57,13 +57,10 @@
     </div>
 
     <div>
-        <table id="playerTable">
+        <table id="playerTable" class="table table-striped">
             <thead>
                 <tr><h4>Player List</h4></tr>
                 <tr>
-                    <th class="col-2">
-                        <input type="checkbox" onclick="selectAll()"> Select All
-                    </th>
                     <th class="col-2">Player Name</th>
                     <th class="col-2">Position</th>
                     <th class="col-2">Tier</th>
@@ -79,7 +76,7 @@
     <div class="row">
         <button class="col" type="button" onclick="savePlayerList()">Save Playes List</button>
         <div class="col-8"></div>
-        <button class="col" type="button" onclick="clearPayers()">Remove Players</button>
+        <button class="col" type="button" onclick="clearPlayers()">Remove Players</button>
         <button class="col" type="button" onclick="RemoveAll()">Remove All</button>
     </div>
 

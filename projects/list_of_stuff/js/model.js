@@ -68,24 +68,20 @@ class Player{
 }
 class Subject{
     constructor(){
-        this._allSubject = [];
+        this.handlers = [];
     }
 
-    subscribe(newPlayerInfo){
-        this._allSubject.push(newPlayerInfo);
+    subscribe(func){
+        this.handlers.push(func);
     }
-    get allPlayer(){
-        return this._allSubject;
-    }
-
-    unsubscribe(playerInfo){
-        this._allSubject = this._allSubject.filter(item => item !== playerInfo);
+    unsubscribe(func){
+        this.handlers = this.handlers.filter(item => item !== func);
     }
 
-    publish(message, object){
-        let scope = object || window;
-        for (let playerId of this._allSubject){
-            playerId(scope, message)
+    publish(msg, obj){
+        let scope = obj || window;
+        for (let func of this.handlers){
+            func(scope, msg);
         }
     }
 }
@@ -97,15 +93,15 @@ class allPlayer extends Subject {
     }
 
     addPlayer (playerInfo){
-        this.allPlayer.push(playerInfo);
+        this._allPlayer.push(playerInfo);
         this.publish("New player has been added", this);
     }
 
-    remove(trIds){
+    removePlayer(trIds){
         for (let index = trIds.length; index > 0, index --;){
             this._allPlayer.splice(trIds[index],1);
         }
-
+        this.publish("Selected players has been deleted", this);
     }
 
     removeAll (){

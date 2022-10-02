@@ -13,10 +13,10 @@ class playersView {
     }
     redrawTable(listOfPlayer, message){
         let tblBody = document.querySelector("#playerTable > tbody");
-        tblBody = "";
+        tblBody.innerText = "";
         for(let playerInfo of listOfPlayer){
             let row = document.createElement("tr");
-            let curPlayerId  = document.querySelectorAll("playerTable > tbody > tr").length;
+            let curPlayerId  = document.querySelectorAll("#playerTable > tbody > tr").length;
             row.setAttribute("id", `${curPlayerId}`);
 
             let tdCheckBox  = document.createElement("td");
@@ -39,6 +39,8 @@ class playersView {
             playerCountry.innerText = playerInfo.Country;
             playerRegion.innerText = playerInfo.Region;
             playerTeam.innerText = playerInfo.Team;
+
+            playerTier.setAttribute("class", playerInfo.Tier);
 
             row.appendChild(playerName);
             row.appendChild(playerPosition);

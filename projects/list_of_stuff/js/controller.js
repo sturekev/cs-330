@@ -68,24 +68,26 @@ function savePlayerList (){
 
 function loadPlayerList (){
     let playerSet  = localStorage.getItem("local_PlayerList");
-    console.log(playerSet);
-    playerSet = playerSet ? JSON.parse(playerSet) : [];
-    let players = playerSet['_allPlayer'];
-    console.log(players);
+    let players = [];
+    if (playerSet) {
+        players = JSON.parse(playerSet)['_allPlayer'];
+    }
     for (let player of players){
         let newPlayer  = new Player(player["_Name"], player["_Position"], player["_Tier"], player["_Country"], player["_Country"], player["_Region"], player["_Team"]);
-        playerModel.add(newPlayer);
+        playerModel.addPlayer(newPlayer);
     }
 }
 var deletePlayerIdList = [];
 function clearPlayers (){ 
-    let cbList = document.querySelectorAll("#playerTable > tobody > tr > td > input[type = 'checkbox']");
+    let cbList = document.querySelectorAll("#playerTable > tbody > tr > td > input[type = 'checkbox']");
     for (let checkbox of cbList){
         if (checkbox.checked){
             deletePlayerIdList.push(parseInt(checkbox.closest('tr')['id']));
         }
     }
-    playerModel.remove(deletePlayerIdList);
+    console.log(deletePlayerIdList);
+    console.log(playerModel)
+    playerModel.removePlayer(deletePlayerIdList);
 }
 
 //Remove all table rows
