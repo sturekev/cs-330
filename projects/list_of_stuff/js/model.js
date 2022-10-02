@@ -65,20 +65,56 @@ class Player{
         this._Team = newTeam;
     }
 
-    toList(){
-        return [this._Name,this._Position,this._Tier,this._Country,this._Region,this._Team]
+}
+class Subject{
+    constructor(){
+        this._allSubject = [];
     }
 
+    subscribe(newPlayerInfo){
+        this._allSubject.push(newPlayerInfo);
+    }
+    get allPlayer(){
+        return this._allSubject;
+    }
+
+    unsubscribe(playerInfo){
+        this._allSubject = this._allSubject.filter(item => item !== playerInfo);
+    }
+
+    publish(message, object){
+        let scope = object || window;
+        for (let playerId of this._allSubject){
+            playerId(scope, message)
+        }
+    }
 }
-class playerList{
+
+class allPlayer extends playerSubject {
     constructor(){
+        super();
         this._allPlayer = [];
     }
 
-    add(newPlayerInfo){
-        this._allPlayer.push(newPlayerInfo);
+    addPlayer (playerInfo){
+        this.allPlayer.push(playerInfo);
+        this.publish("New player has been added", this);
     }
-    get allPlayer(){
-        return this._allPlayer;
+
+    remove(trIds){
+        for (let index = trIds.length; index > 0, index --;){
+            this._allPlayer.splice(trIds[index],1);
+        }
+
+    }
+
+    removeAll (){
+        this._allPlayer = [];
+        this.publish("The player local storage has been cleared", this);
+    }
+
+    [Symbol.iterator](){
+        let index = -1;
+        return{ next: () => ({value: this._allPlayer[++index], done : !(index in this._allPlayer)})};
     }
 }

@@ -54,12 +54,12 @@
         </form>
         <div id="feedbackMessage"></div>
         <div class="row">
-            <button class="bg-primary text-white" type="button" id="addTaskBtn" onclick="addTask()">Add task</button>
+            <button class="bg-primary text-white" type="button" id="addTaskBtn" onclick="addPlayer()">Add task</button>
         </div>
     </div>
 
     <div>
-        <table id="taskList">
+        <table id="playerTable">
             <thead>
                 <tr><h4>Player List</h4></tr>
                 <tr>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="row">
-        <button class="col" type="button" onclick="saveToJson()">Save Playes List</button>
+        <button class="col" type="button" onclick="savePlayerList()">Save Playes List</button>
         <div class="col-8"></div>
         <button class="col" type="button" onclick="removeRow()">Remove Players</button>
         <button class="col" type="button" onclick="RemoveAll()">Remove All</button>

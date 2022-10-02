@@ -5,7 +5,6 @@
 //Import other file.js
 // import {} from './model.js';
 // import {addRow,removeRow,RemoveAll} from './controller.js';
-// view  method interface for user
 
 // Tiers List
 var Tiers = ["S", "A", "B", "C", "D","E", "F"];
@@ -20,8 +19,11 @@ var Teams = ["G2 Esports", "Rogue","MAD Lions", "Fnatic",
  "CTBC Flying Oyster", "Beyond Gaming","Saigon Buffalo", "GAM Esports",
  "CBLOL","LOUD","DetonatioN FocusMe", "Isurus","The Chiefs","Istanbul Wildcats"];
 //
+
+var playerModel = new allPlayer ();
+var playerView = new playersView(playerModel);
 // warning
-function displayWarnings( ){
+function displayWarnings(){
     let warningDiv = document.querySelector("#feedbackMessage");
     let warnName = document.createElement('div');
     warnName.innerText = `Fill out Player Name or Country`;
@@ -30,7 +32,7 @@ function displayWarnings( ){
     
 }
 // add Task function
-function addTask() {
+function addPlayer() {
     let vals = [];
     let rowcolids = ["PlayerName", "Position", "Tier", "Country", "Region", "Team"];
 
@@ -41,41 +43,63 @@ function addTask() {
         displayWarnings();
     }
     else{
+        let warningMsg = document.querySelector("#feedbackMessage");
+        warningMsg.classList = "";
+        warningMsg.innerText = "";
         for (let row of rowcolids){
         let val = document.getElementById(row).value;
         vals.push(val);
         }
-        addRow(vals, document.getElementById("taskList"));
+
+        let newPlayer = new Player(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
+        playerModel.addPlayer(newPlayer);
+        // list of data
+        // addRow(vals, document.getElementById("taskList"));
     }
     
     
 }
 
+function savePlayerList (){
+    localStorage.removeItem("local_graage");
+    localStorage.setItem("local_PlayerList", JSON.stringify(playerModel));
+}
+
+
+function loadPlayerList (){
+    let playerSet  = localStorage.getItem("local_PlayerList");
+
+    playerSet = playerSet ? JSON.parse(playerSet): [];
+    let players = playerSet[_allPlayer];
+    for (let player of players){
+        let newPlayer  = new Player(player["_Name"], player["_Position"], player["_Tier"], player["_Country"], player["_Country"], player["_Region"], player["_Team"])
+    }
+}
 //Add a new row to the table
 
-function addRow(valueList, parent) {
-    let tb = parent.getElementsByTagName("tbody")[0];
-    let row = document.createElement("tr");
-    let td = document.createElement("td");
-    let cb = document.createElement("input");
+// function addRow(valueList, parent) {
+//     let tb = parent.getElementsByTagName("tbody")[0];
+//     let row = document.createElement("tr");
+//     let td = document.createElement("td");
+//     let cb = document.createElement("input");
 
-    let tierVal = document.getElementById('Tier').value;
+//     let tierVal = document.getElementById('Tier').value;
     
     
-    cb.setAttribute("type","checkbox");
-    // set up for check box;
-    cb.setAttribute("onclick","checkSelect(this);");
-    td.appendChild(cb);
-    row.appendChild(td);
+//     cb.setAttribute("type","checkbox");
+//     // set up for check box;
+//     cb.setAttribute("onclick","checkSelect(this);");
+//     td.appendChild(cb);
+//     row.appendChild(td);
 
-    for (let value of valueList){
-        let td = document.createElement("td");
-        if (value == tierVal){td.setAttribute("class",`col-2 ${tierVal}`);}
-        td.innerText = value;
-        row.appendChild(td)
-    }
-    tb.appendChild(row);
-}
+//     for (let value of valueList){
+//         let td = document.createElement("td");
+//         if (value == tierVal){td.setAttribute("class",`col-2 ${tierVal}`);}
+//         td.innerText = value;
+//         row.appendChild(td)
+//     }
+//     tb.appendChild(row);
+// }
 
 var thisList = [];
 function checkSelect(selector){
@@ -106,11 +130,7 @@ function removeRow(element) {
 
 //Remove all table rows
 function RemoveAll() {
-    let tbody = document.getElementsByTagName("tbody")[0];
-    let allTr = tbody.getElementsByTagName("tr");
-    for (let index = allTr.length - 1; index >= 0; index--){
-        tbody.removeChild(allTr[index]);
-    }
+    playerModel.removeAll();
 }
 
 
