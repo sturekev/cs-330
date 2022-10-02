@@ -93,6 +93,7 @@ function clearPlayers (){
 //Remove all table rows
 function RemoveAll() {
     playerModel.removeAll();
+    
 }
 
 // show the option for Sellect options
