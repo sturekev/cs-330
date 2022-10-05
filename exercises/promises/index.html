@@ -10,18 +10,18 @@
 <body>
     <div>
         <form id=form_number>
-            <div>
-                <div>
-                    <label for="number">Enter a number</label>
-                    <input type="number" id="number" placeholder="Enter a number" />
+            <div class="row">
+                <div id="firstCol" class="col">
+                    <label class="bg-light text-dark border-0 rounded"  for="number">Enter a number</label>
+                    <input class="mb-4 bg-light text-dark border rounded"  type="number" id="number" placeholder="Enter a number" />
                 </div>
-                <div>
-                    <label for="getThem">Click a button</label>
-                    <input type=button id="getInfo" onclick="clickedon()" value="Get Info!" />
+                <div class="col">
+                    <label class="bg-light text-dark border-0 rounded" for="getThem">Click a button</label>
+                    <input class="bg-primary text-white border rounded" type=button id="getInfo" onclick="clickedon()" value="Get Info!" />
                 </div>
-                <div>
-                    <label for=batch>Check a box to get 3 numbers at once</label>
-                    <input type="checkbox" value="" id="batch">
+                <div class="col">
+                    <label class="bg-light text-dark border-0 rounded" for=batch>Get in batch</label>
+                    <input class="border-0 rounded" type="checkbox" value="" id="batch">
                 </div>
             </div>
         </form>
