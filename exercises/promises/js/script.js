@@ -3,19 +3,37 @@
 /* jshint node: true */
 'use strict';
 // http://numbersapi.com/42/math?callback=showNumber 
-function createDiv (data){
+function createDivforIndivdual (info,all_numbers){
     let row = document.createElement("div");
-    row.setAttribute("class", "row");
+    row.classList= "row";
+
     let numDiv = document.createElement('div');
-    numDiv.setAttribute("class", "col-1 bg-secondary text-white border rounded");
-    numDiv.innerText = data["number"];
+    numDiv.innerText = `${info.number}`;
+    numDiv.classList = "h1 col-4";
     row.appendChild(numDiv);
 
     let textDiv = document.createElement('div');
-    textDiv.setAttribute("class", "col-6 bg-success text-white border rounded");
-    textDiv.innerText = data["text"];
+    textDiv.innerText = `${info.text}`;
+    textDiv.classList = "alert alert-success col-8";
     row.appendChild(textDiv);
-    return row
+    all_numbers.appendChild(row);
+}
+
+function createDivforBatch (key,info,all_numbers){
+    let newDiv = document.createElement('div');
+    newDiv.classList = 'row';
+
+    let numDiv = document.createElement('div');
+    numDiv.innerText = `${key}`;
+    numDiv.classList = 'h1 col-4';
+    newDiv.appendChild(numDiv);
+
+    let infoDiv = document.createElement('div');
+    infoDiv.innerText = `${info[key]}`;
+    infoDiv.classList = 'alert alert-success col-8';
+    newDiv.appendChild(infoDiv);
+
+    all_numbers.appendChild(newDiv);
 }
 
 function checkContent(all_numbers){
@@ -25,71 +43,28 @@ function checkContent(all_numbers){
 }
 
 async function get_individual(num, all_numbers) {
-    var dataD = [];
-
     checkContent(all_numbers);
-
-    let jsonData1 = await fetch(`http://numbersapi.com/${num-1}/math?json`)
-    .then(response => response.json())
-    .catch(error => console.log(error));
-    dataD.push(jsonData1);
     
-    let jsonData2 = await fetch(`http://numbersapi.com/${num}/trivia?json`)
-    .then(response => response.json())
-    .catch(error => console.log(error));
-    dataD.push(jsonData2);
+    let index_num  = num -1;
+    while (index_num <= num+1){
+        let currNumInfo = await fetch(`http://numbersapi.com/${index_num}?json`)
+        .then(response => response.json())
+        .catch(error => console.log(error));
 
-    let jsonData3 = await fetch(`http://numbersapi.com/${num+1}/date?json`)
-    .then(response => response.json())
-    .catch(error => console.log(error));
-    dataD.push(jsonData3);
-
-    setTimeout(function(){
-            
-        console.log(dataD[0]);
-        let row = createDiv(dataD[0]);
-        all_numbers.appendChild(row);
-    },500);
-    setTimeout(function(){
-            
-        console.log(dataD[1]);
-        let row = createDiv(dataD[1]);
-        all_numbers.appendChild(row);
-    },1000);
-    setTimeout(function(){
-            
-        console.log(dataD[2]);
-        let row = createDiv(dataD[2]);
-        all_numbers.appendChild(row);
-    },1500);
-        
+        createDivforIndivdual(currNumInfo,all_numbers);
+        index_num++;
+    }
 }
 
 async function get_batch(num, all_numbers) {
-    var dataD = [];
-
     checkContent(all_numbers);
 
-    let jsonData1 = await fetch(`http://numbersapi.com/${num-1}/math?json`)
+    let allInfo = await fetch(`http://numbersapi.com/${num-1}..${num+1}`)
     .then(response => response.json())
     .catch(error => console.log(error));
-    dataD.push(jsonData1);
-    
-    let jsonData2 = await fetch(`http://numbersapi.com/${num}/trivia?json`)
-    .then(response => response.json())
-    .catch(error => console.log(error));
-    dataD.push(jsonData2);
 
-    let jsonData3 = await fetch(`http://numbersapi.com/${num+1}/date?json`)
-    .then(response => response.json())
-    .catch(error => console.log(error));
-    dataD.push(jsonData3);
-
-    console.log(dataD);
-    for (let index = 0;index < dataD.length; index++){
-        console.log(dataD[index]);
-        let row = createDiv(dataD[index]);
-        all_numbers.appendChild(row);
+    for (let key in allInfo){
+        createDivforBatch(key,allInfo,all_numbers);
     }
 
 }
@@ -102,13 +77,4 @@ async function clickedon() {
     } else {
         get_individual(num, all_numbers);
     }
-
-    const Http = new XMLHttpRequest();
-    const url='http://numbersapi.com/42/math';
-    Http.open("GET", url);
-    Http.send();
-
-    Http.onreadystatechange = (e) => {
-    console.log("dssdsd "+Http.responseText)
-}
 }
