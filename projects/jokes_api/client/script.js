@@ -3,7 +3,7 @@
 
 async function get_Jokes_Api (apiLink){
     apiCall = await fetch(apiLink)
-    .then((response) => response.json(), { mode: 'no-cors'})
+    .then((response) => response.json())
     .then((response) => {
         console.log(response);
         populateData(response);
@@ -28,7 +28,7 @@ function defineApiGet(category,language,limit = null,jokeId = null){
 }
 async function randomJokes() {
     apiCall =  await fetch('https://kevin00co.pythonanywhere.com/api/v1/jokes/random')
-    .then((response) => response.json(), { mode: 'no-cors'})
+    .then((response) => response.json())
     .then((response) => {
         console.log(response)
         populateData(response);

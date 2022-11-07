@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app=app)
 
 def getJokes (language: str,category: str) -> list:
     if language == "all" and category != "all":
@@ -41,12 +42,6 @@ def sendV1Jokes01():
         return jsonify({"error": "Index out of range "})
 
     return jsonify({"data":data })
-
-@app.route("/api/v1/jokes/random", methods=["GET"])
-@cross_origin
-def sendV1Jokes02():
-    response = getRandomJokes()
-    return jsonify({"data": response})
 
 if __name__ == '__main__':
     app.run()
