@@ -6,7 +6,10 @@ async function get_Jokes_Api (apiLink){
     .then((response) => response.json())
     .then((response) => {
         console.log(response);
-        populateData(response);
+        if (response["error"]){
+            displayWarning(response["error"]);
+        }else{ populateData(response); }
+        
     })
 }
 function defineApiGet(category,language,limit = null,jokeId = null){
@@ -31,7 +34,9 @@ async function randomJokes() {
     .then((response) => response.json())
     .then((response) => {
         console.log(response)
-        populateData(response);
+        if (response["error"]){
+            displayWarning(response["error"]);
+        }else{ populateData(response); }
     })
 }
 
@@ -62,6 +67,14 @@ function populateData(response) {
 
         contentDiv.appendChild(div);
     }
+}
+
+function displayWarning(response) {
+    let warningGreet  = document.querySelector("feedbackMessage");
+    let warnNumber = document.createElement('div');
+    warnNumber.innerText = response["error"];
+    warnNumber.classList.add("alert","alert-warning");
+    warningGreet.appendChild(warnNumber);
 }
 
 window.onload =function () {
