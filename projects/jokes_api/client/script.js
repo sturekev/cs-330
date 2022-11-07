@@ -2,29 +2,51 @@
 'use strict';
 
 async function get_Jokes_Api (apiLink){
-    top = await fetch(apiLink)
-    .then((response) => response.json())
+    apiCall = await fetch(apiLink)
+    .then((response) => response.json(), { mode: 'no-cors'})
     .then((response) => {
+        console.log(response);
         populateData(response);
     })
 }
-function defineApiGet(category,language,limit,jokeId) {
+function defineApiGet(category,language,limit = null,jokeId = null){
     let ApiLink;
     if (limit){
         ApiLink = 
-    `http://127.0.0.1:5000/api/v1/jokes?category=${category}&language=${language}&limit=${limit}`;
+    `https://kevin00co.pythonanywhere.com/api/v1/jokes?category=${category}&language=${language}&limit=${limit}`;
     }else if(!limit){
         if (jokeId){
             ApiLink = 
-    `http://127.0.0.1:5000/api/v1/jokes?category=${category}&language=${language}&limit=${limit}$id=${jokeId}`;
+    `https://kevin00co.pythonanywhere.com/api/v1/jokes?category=${category}&language=${language}&limit=${limit}$id=${jokeId}`;
         }
         else{
             ApiLink = 
-    `http://127.0.0.1:5000/api/v1/jokes?category=${category}&language=${language}`;
+    `https://kevin00co.pythonanywhere.com/api/v1/jokes?category=${category}&language=${language}`;
         }
     }
-    return get_Jokes_Api(ApiLink);
+    get_Jokes_Api(ApiLink);
 }
+async function randomJokes() {
+    apiCall =  await fetch('https://kevin00co.pythonanywhere.com/api/v1/jokes/random')
+    .then((response) => response.json(), { mode: 'no-cors'})
+    .then((response) => {
+        console.log(response)
+        populateData(response);
+    })
+}
+
+function getRandomJokes() {
+    randomJokes();      
+}
+
+function getConditionJokes() {
+    let category = document.querySelector("#categories").value;
+    let language = document.querySelector('#language').value;
+    let number = document.querySelector('#limit').value || null;
+    let id = document.querySelector('#id').value || null;
+    defineApiGet(category,language,number,id);
+}
+
 function populateData(response) {
     let contentDiv = document.querySelector("content");
     let data = response[0];
@@ -43,12 +65,4 @@ function populateData(response) {
 }
 
 window.onload =function () {
-    let urlParams = new URLSearchParams(window.location.search);
-
-    let category = urlParams.get("category") || "all";
-    let language = urlParams.get("language") || "";
-    let limit = urlParams.get("limit") || "";
-    let jokeId = urlParams.get("id") || "";
-    defineApiGet(category, language,limit, jokeId);
-
 }

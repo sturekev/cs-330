@@ -4,10 +4,48 @@
     <title>Flask for Fun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script type="text/javascript" defer="defer" src="script.js"></script>
 </head>
 
 <body>
-    <div>Hello world</div>
+    <form method="POST" class="container">
+        <div class="row">
+            <div class="col">
+                <label for="category" value="Category">Category</label>
+                <select class="form-select" name="category" id="categories">
+                    <option value="neutral">neutral</option>
+                    <option value="chuck">Chuck Norris</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="language" value="Language">Language</label>
+                <select class="form-select" name="language" id="language">
+                    <option value="en">en</option>
+                    <option value="es">es</option>
+                    <option value="de">de</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="row" for="number" value="Number">Number</label>
+                <input class="form-text row" name="number" id="limit">
+            </div>
+            <div class="col">
+                <label class="row" for="number" value= "Number">ID</label>
+                <input class="form-text row" type="form-text" name="id" id="id">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="bg-primary text-white" type="button" id="addTaskBtn" onclick="getConditionJokes()">Get Jokes</button>
+            </div>
+            <div class="col">
+                <button class="bg-primary text-white" type="button" id="addTaskBtn" onclick="getRandomJokes()">Random</button>
+            </div>
+        </div>
+    </form>
     <div id="content">
     </div>
 </body>
