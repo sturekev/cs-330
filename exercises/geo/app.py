@@ -14,13 +14,12 @@ def get_data_from_db(query: str) -> list:
     table = query
     if table:
         cur.execute(query)
-    else :
-        return response.append({'Error': "table name not in database"})
     for i in cur:
-        response.add    (i[0])
-    print (response)   
+        response.add(i[0])
     cur.close() 
-    return list(response)
+    response =list(response)
+    response.sort()
+    return response
 # get_data_from_db(query="dds") 
 def get_country_info(column, value):
     response = []
