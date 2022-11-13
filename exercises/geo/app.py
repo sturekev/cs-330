@@ -28,7 +28,8 @@ def get_country_info(column, value):
     cur = connection.cursor()
     cur.execute(f"select * from country where {column} = ?", (value,))
     for AFG, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2 in cur:
-        response.append([AFG,name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate,capital, code2])    
+        response.append([AFG,name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate,capital, code2])   
+    cur.close() 
     return response
 
 ###
