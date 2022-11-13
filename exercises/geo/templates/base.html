@@ -1,12 +1,14 @@
 <html>
   <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>    
   </head>
   <body>
-    <div>
-      <div>
-        <div><a href="/country">Country info</a></div>
-        <div><a href="/region">Region info</a></div>
-        <div><a href="/continent">Continent info</a></div>
+    <div class="container"> 
+      <div class="row">
+        <div class="col-4"><a href="/country">Country info</a></div>
+        <div class="col-4"><a href="/region">Region info</a></div>
+        <div class="col-4"><a href="/continent">Continent info</a></div>
       </div>
     </div>
     {% block content %} {% endblock %}

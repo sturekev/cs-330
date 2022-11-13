@@ -1,1 +1,26 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Find information</h1>
+    <form action="/" method="POST" class="form">
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    <select name="region" class="form-select">
+                        {% for o in options %}
+                        <option value="{{o}}">{{o}}</option>
+                        {% endfor %}
+                    </select>
+                    <label class="bg-info text-dark">Pick a region</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <input type="submit" class="btn btn-primary" value="Get Info!">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
