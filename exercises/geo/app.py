@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, send_from_directory
 from flask import redirect, url_for
 import sqlite3
+import pathlib
 app = Flask(__name__)
 
 THE_WORLD = []
@@ -9,10 +10,15 @@ CACHE = {}
 def get_data_from_db(query: str) -> list:
     """retrieve data from the database and return to the user"""
     response = set()
-    connection = sqlite3.connect('world.sqlite3')
-    cur = connection.cursor()
-    table = query
-    if table:
+    if pathlib.Path("world.sqlite3").exists():
+
+        connection = sqlite3.connect('world.sqlite3')
+        cur = connection.cursor()
+        cur.execute(query)
+    else:
+        db_file = pathlib.Path('exercises/geo/world.sqlite3')
+        connection = sqlite3.connect(db_file)
+        cur = connection.cursor()
         cur.execute(query)
     for i in cur:
         response.add(i[0])
@@ -23,8 +29,16 @@ def get_data_from_db(query: str) -> list:
 # get_data_from_db(query="dds") 
 def get_country_info(column, value):
     response = []
-    connection = sqlite3.connect('world.sqlite3')
-    cur = connection.cursor()
+    if pathlib.Path("world.sqlite3").exists():
+
+        connection = sqlite3.connect('world.sqlite3')
+        cur = connection.cursor()
+        cur.execute(query)
+    else:
+        db_file = pathlib.Path('exercises/geo/world.sqlite3')
+        connection = sqlite3.connect(db_file)
+        cur = connection.cursor()
+        cur.execute(query)
     cur.execute(f"select * from country where {column} = ?", (value,))
     for AFG, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2 in cur:
         response.append([AFG,name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate,capital, code2])   
