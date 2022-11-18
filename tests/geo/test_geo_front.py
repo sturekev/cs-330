@@ -4,6 +4,7 @@
 import os
 import subprocess
 import pytest
+import playwright
 from playwright.sync_api import Page
 
 
