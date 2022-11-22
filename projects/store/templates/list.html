@@ -3,28 +3,27 @@
 {% block content %}
 
 <div class="container">
-    {% if "error" %}
-        <div class="alert alert-Warning">No product for sales</div>          
+    {% if items %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in items %}
+            <tr>
+                <td>{{ r.name }}</td>
+                <td>{{ r.category }}</td>
+                <td>{{ r.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
     {% else %}
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for r in items %}
-                <tr>
-                    <td>{{ r.name }}</td>
-                    <td>{{ r.category }}</td>
-                    <td>{{ r.price }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>  
-
+        <div class="alert alert-Warning">No product for sales</div>
     {% endif %}
 </div>
 

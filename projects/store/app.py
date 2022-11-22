@@ -6,12 +6,9 @@ def index():
     return render_template("index.html")
 @app.route("/list")
 def show_list():
-    if ItemSchema(many=True) and Item.query.all():
-        items = Item.query.all()
-        item_schema = ItemSchema(many=True)
-        return render_template('list.html', items = item_schema.dump(items))
-    else:
-        return render_template('list.html',"error")
+    items = Item.query.all()
+    item_schema = ItemSchema(many=True)
+    return render_template('list.html', items = item_schema.dump(items))
 @app.route("/add", methods=["GET", "POST"])
 def add_item():
     if request.method == "POST" :
