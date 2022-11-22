@@ -15,17 +15,20 @@ def build_db(filename):
     db.create_all()
 
     # Add data to the DB
-    with open(f"{filename}.csv") as f:
-        content = csv.reader(f)
-        next(content)
-    
-        for line in content:
-            item = Item(
-                name = line[0],
-                category = line[1],
-                price = line[2]
-            )
-            db.session.add(item)
+    try:
+        with open(f"{filename}.csv") as f:
+            content = csv.reader(f)
+            next(content)
+        
+            for line in content:
+                item = Item(
+                    name = line[0],
+                    category = line[1],
+                    price = line[2]
+                )
+                db.session.add(item)
+        db.session.commit() 
+    except:
         db.session.commit()
 
 

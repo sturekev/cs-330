@@ -3,24 +3,29 @@
 {% block content %}
 
 <div class="container">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in items %}
-            <tr>
-                <td>{{ r.name }}</td>
-                <td>{{ r.category }}</td>
-                <td>{{ r.price }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% if "error" %}
+        <div class="alert alert-Warning">No product for sales</div>          
+    {% else %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in items %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.category }}</td>
+                    <td>{{ r.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+
+    {% endif %}
 </div>
 
 
