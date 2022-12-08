@@ -1,3 +1,4 @@
+
 # Python standard libraries
 import json
 import os
@@ -21,7 +22,9 @@ from user import User
 
 # Configuration
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_ID = "616573041271-e1r6oqq79b1kg870qma5j1tdh9o1ra3l.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_SECRET = "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"
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
@@ -87,8 +90,8 @@ def callback():
     # Get authorization code Google sent back to you
     code = request.args.get("code")
 
-    # Find out what URL to hit to get tokens that allow you to ask for
-    # things on behalf of a user
+# Find out what URL to hit to get tokens that allow you to ask for
+# things on behalf of a user
     google_provider_cfg = get_google_provider_cfg()
     token_endpoint = google_provider_cfg["token_endpoint"]
 
@@ -103,7 +106,7 @@ def callback():
         token_url,
         headers=headers,
         data=body,
-        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+        auth=(GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET),
     )
 
     # Parse the tokens!
@@ -126,6 +129,7 @@ def callback():
         users_name = userinfo_response.json()["given_name"]
     else:
         return "User email not available or not verified by Google.", 400
+
 
     # Create a user in your db with the information provided
     # by Google
